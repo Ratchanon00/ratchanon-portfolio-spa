@@ -4,22 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - รัชชานนท์ ปานชื่น</title>
+    <title>Portfolio - รัชชานนท์ ปานชื่น</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Prompt:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <!-- Icons (FontAwesome) -->
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind Config & Custom Styling -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -28,27 +27,33 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         outfit: ['Outfit', 'sans-serif'],
+                        prompt: ['Prompt', 'sans-serif'],
                     },
                     colors: {
-                        slate: {
-                            850: '#151e2e',
-                            900: '#0f172a',
-                            950: '#020617',
+                        brand: {
+                            base: '#030712',
+                            purple: '#8b5cf6',
+                            indigo: '#6366f1',
+                            blue: '#3b82f6',
                         }
                     },
                     animation: {
-                        'blob': 'blob 7s infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'glow-slow': 'glow 10s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'entrance': 'entrance 1s ease-out forwards',
                     },
                     keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        glow: {
+                            '0%, 100%': { transform: 'translate(0, 0) scale(1)', opacity: '0.3' },
+                            '33%': { transform: 'translate(10%, -10%) scale(1.2)', opacity: '0.5' },
+                            '66%': { transform: 'translate(-5%, 15%) scale(0.9)', opacity: '0.4' },
                         },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        entrance: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     }
@@ -56,493 +61,321 @@
             }
         }
     </script>
+
     <style type="text/tailwindcss">
         @layer utilities {
-            .glass-card {
-                @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl transition-all duration-300;
+            .glass-panel {
+                @apply bg-white/5 backdrop-blur-2xl border border-white/10;
             }
-            .glass-card:hover {
-                @apply bg-white/10 border-white/20 transform -translate-y-1 shadow-2xl;
+            .text-glow {
+                text-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
             }
-            .text-gradient {
-                @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400;
+            .nav-link {
+                @apply relative text-slate-400 hover:text-white transition-colors duration-300;
             }
-            .animate-delay-100 { animation-delay: 100ms; }
-            .animate-delay-200 { animation-delay: 200ms; }
-            .animate-delay-300 { animation-delay: 300ms; }
-            .animate-delay-400 { animation-delay: 400ms; }
-            
-            /* Background Blur Fix for blobs */
-            .animation-delay-2000 { animation-delay: 2s; }
-            .animation-delay-4000 { animation-delay: 4s; }
+            .nav-link::after {
+                @apply content-[''] absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-300;
+            }
+            .nav-link:hover::after {
+                @apply w-full;
+            }
+            .section-title {
+                @apply text-4xl md:text-5xl font-bold text-center mb-16 font-prompt bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400;
+            }
         }
-        
+
         body {
-            background-color: #020617; /* slate-950 */
-            color: #cbd5e1; /* slate-300 */
+            background-color: #030712;
+            color: #94a3b8;
         }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
     </style>
 </head>
 
-<body class="antialiased selection:bg-purple-500/30 selection:text-white relative overflow-x-hidden min-h-screen">
+<body class="overflow-x-hidden font-sans selection:bg-indigo-500/30 selection:text-white">
 
-    <!-- Glowing Background Decor -->
-    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <!-- Backgound Glows -->
+    <div class="fixed inset-0 -z-10 pointer-events-none">
         <div
-            class="absolute top-0 -left-10 w-96 h-96 bg-blue-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-blob">
+            class="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] animate-glow-slow">
         </div>
         <div
-            class="absolute top-20 right-10 w-96 h-96 bg-purple-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-blob animation-delay-2000">
-        </div>
-        <div
-            class="absolute bottom-10 left-1/3 w-[30rem] h-[30rem] bg-indigo-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-40 animate-blob animation-delay-4000">
+            class="absolute bottom-1/4 -left-20 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] animate-glow-slow animation-delay-2000">
         </div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-12 lg:py-20 lg:flex lg:gap-12 min-h-[calc(100vh-80px)]">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b-0">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home"
+                class="text-2xl font-bold font-outfit tracking-tighter text-white hover:text-indigo-400 transition-colors">
+                Portfolio<span class="text-indigo-500">.</span>
+            </a>
+            <div class="hidden md:flex gap-10 font-medium text-sm">
+                <a href="#home" class="nav-link">หน้าแรก</a>
+                <a href="#about" class="nav-link">เกี่ยวกับฉัน</a>
+                <a href="#projects" class="nav-link">ผลงาน</a>
+                <a href="#contact" class="nav-link">ติดต่อ</a>
+            </div>
+            <button class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
 
-        <!-- Sidebar / Profile Overlay -->
-        <aside class="lg:w-1/3 flex-shrink-0 mb-12 lg:mb-0 lg:sticky lg:top-12 h-fit opacity-0 animate-fade-in-up">
-            <div class="glass-card rounded-3xl p-8 flex flex-col items-center text-center">
-                <!-- Profile Image Removed -->
-
-                <!-- Name & Title -->
-                <h1 class="font-outfit text-3xl font-bold text-white mb-2">รัชชานนท์ ปานชื่น</h1>
-                <p class="text-blue-400 font-medium mb-6">นักศึกษาวิศวกรรมคอมพิวเตอร์ & นักกีฬาฟุตบอล</p>
-
-                <p class="text-slate-400 text-sm leading-relaxed mb-8">
-                    มุ่งมั่นในการเรียนรู้พัฒนาโปรเจกต์เทคโนโลยีและวิศวกรรมข้อมูล
-                    ควบคู่ไปกับสปิริตและวินัยของการเป็นนักกีฬาฟุตบอลแบบมืออาชีพ
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center px-6 pt-20">
+        <div class="max-w-5xl mx-auto w-full">
+            <div class="animate-entrance opacity-0">
+                <h2 class="text-indigo-400 font-medium mb-4 tracking-widest uppercase text-sm md:text-base">
+                    ยินดีต้อนรับสู่พื้นที่ของฉัน</h2>
+                <h1 class="text-5xl md:text-8xl font-prompt font-bold text-white mb-6 leading-tight">
+                    สวัสดีครับ ฉันชื่อ<br>
+                    <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-500 uppercase tracking-tight">
+                        รัชชานนท์ ปานชื่น
+                    </span>
+                </h1>
+                <p class="text-lg md:text-2xl text-slate-400 max-w-2xl leading-relaxed mb-10">
+                    นักศึกษาวิศวกรรมคอมพิวเตอร์และนักฟุตบอล ผสมผสานความเป็นไปได้ของโค้ดเข้ากับวินัยของกีฬา
+                    มุ่งเน้นการสร้างสรรค์นวัตกรรม AI และเทคโนโลยีที่เปลี่ยนโลก
                 </p>
+                <a href="#contact"
+                    class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg shadow-indigo-500/25">
+                    พูดคุยกันได้เลย <i class="fas fa-comment-dots"></i>
+                </a>
+            </div>
+        </div>
+    </section>
 
-                <!-- Navigation Tabs (SPA approach) -->
-                <nav class="w-full flex flex-col gap-3 mb-8">
-                    <button onclick="switchTab('projects')" id="tab-projects"
-                        class="tab-btn active w-full py-3 px-4 rounded-xl text-sm font-medium transition-all text-white bg-white/10 border border-white/20 shadow-lg relative overflow-hidden group">
-                        <span class="relative z-10 flex items-center gap-3"><i
-                                class="fas fa-layer-group text-blue-400 w-5"></i> ผลงานเด่น (Projects)</span>
-                        <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                        </div>
-                    </button>
-                    <button onclick="switchTab('experience')" id="tab-experience"
-                        class="tab-btn w-full py-3 px-4 rounded-xl text-slate-400 text-sm font-medium transition-all hover:text-white hover:bg-white/5 text-left border border-transparent">
-                        <span class="flex items-center gap-3"><i
-                                class="fas fa-briefcase text-purple-400 w-5 text-center"></i> ประสบการณ์
-                            (Experience)</span>
-                    </button>
-                    <button onclick="switchTab('education')" id="tab-education"
-                        class="tab-btn w-full py-3 px-4 rounded-xl text-slate-400 text-sm font-medium transition-all hover:text-white hover:bg-white/5 text-left border border-transparent">
-                        <span class="flex items-center gap-3"><i
-                                class="fas fa-graduation-cap text-emerald-400 w-5 text-center"></i> ประวัติการศึกษา
-                            (Education)</span>
-                    </button>
-                    <button onclick="switchTab('skills')" id="tab-skills"
-                        class="tab-btn w-full py-3 px-4 rounded-xl text-slate-400 text-sm font-medium transition-all hover:text-white hover:bg-white/5 text-left border border-transparent">
-                        <span class="flex items-center gap-3"><i class="fas fa-star text-amber-400 w-5 text-center"></i>
-                            ทักษะ (Skills)</span>
-                    </button>
-                </nav>
-
-                <!-- Contact Info -->
-                <div class="w-full space-y-4 text-sm text-slate-300 text-left mb-8 border-t border-white/10 pt-6">
-                    <div class="flex items-center gap-4 hover:text-white transition-colors">
-                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-blue-400"><i
-                                class="fas fa-envelope"></i></div>
-                        <span>terdnakub@gmail.com</span>
-                    </div>
-                    <div class="flex items-center gap-4 hover:text-white transition-colors">
-                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-purple-400">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <span>08X-XXX-XXXX</span>
-                    </div>
-                    <div class="flex items-center gap-4 hover:text-white transition-colors">
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="section-title">เกี่ยวกับฉัน</h2>
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div class="space-y-8">
+                    <div class="glass-panel rounded-3xl p-10 relative overflow-hidden group">
                         <div
-                            class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-emerald-400">
-                            <i class="fas fa-map-marker-alt"></i>
+                            class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                         </div>
-                        <span>พิษณุโลก</span>
+                        <h3 class="text-2xl font-bold text-white mb-6 font-prompt">ประวัติย่อ</h3>
+                        <p class="text-slate-400 leading-relaxed text-lg mb-6">
+                            ปัจจุบันเป็นนักศึกษาสาขาวิชาวิศวกรรมคอมพิวเตอร์ มหาวิทยาลัยราชภัฏพิบูลสงคราม
+                            ผมมีความหลงใหลในการแก้ปัญหาด้วยเทคโนโลยี (Problem Solving) และการพัฒนา AI Agent
+                            ที่สามารถทำงานได้จริงในโลกธุรกิจ
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase mb-1">Email</p>
+                                <p class="text-white font-medium">terdnakub@gmail.com</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase mb-1">Location</p>
+                                <p class="text-white font-medium">พิษณุโลก</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-panel rounded-2xl p-6 text-center">
+                            <i class="fas fa-code text-blue-400 text-3xl mb-4"></i>
+                            <h4 class="text-white font-bold">Tech Stack</h4>
+                            <p class="text-sm">React, Three.js, AI Agents</p>
+                        </div>
+                        <div class="glass-panel rounded-2xl p-6 text-center">
+                            <i class="fas fa-soccer-ball text-purple-400 text-3xl mb-4"></i>
+                            <h4 class="text-white font-bold">Soft Skills</h4>
+                            <p class="text-sm">Teamwork, Discipline</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Social Links -->
-                <div class="flex justify-center gap-4">
-                    <a href="#"
-                        class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-xl text-slate-300 hover:text-blue-500 hover:scale-110 transition-transform">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://github.com/Ratchanon00"
-                        class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-xl text-slate-300 hover:text-white hover:scale-110 transition-transform">
-                        <i class="fab fa-github"></i>
-                    </a>
+                <div class="space-y-12">
+                    <div class="relative pl-12 border-l-2 border-slate-800">
+                        <h3 class="text-2xl font-bold text-white mb-10 font-prompt">การศึกษา</h3>
+
+                        <div class="relative mb-12">
+                            <div
+                                class="absolute -left-[61px] top-0 w-6 h-6 rounded-full bg-brand-base border-4 border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.5)]">
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white leading-tight">วิศวกรรมคอมพิวเตอร์</h4>
+                                <p class="text-indigo-400 font-medium mb-2">มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
+                                <p class="text-xs text-slate-500 uppercase mb-4">2566 - ปัจจุบัน</p>
+                                <p class="text-slate-400 text-sm italic">
+                                    มุ่งเน้นการพัฒนานวัตกรรมและเทคโนโลยีสารสนเทศสมัยใหม่</p>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <div
+                                class="absolute -left-[61px] top-0 w-6 h-6 rounded-full bg-brand-base border-4 border-slate-700">
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white leading-tight">มัธยมศึกษา</h4>
+                                <p class="text-slate-400 font-medium mb-2">โรงเรียนหล่มสักวิทยาคม</p>
+                                <p class="text-xs text-slate-500 uppercase mb-4">จบการศึกษา 2565</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </aside>
+        </div>
+    </section>
 
-        <!-- Main Content Area -->
-        <main class="lg:w-2/3 lg:pl-4 relative">
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-6 bg-white/[0.01]">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="section-title">ผลงานที่ภาคภูมิใจ</h2>
 
-            <!-- Projects View -->
-            <div id="view-projects" class="content-section space-y-8 opacity-0 animate-fade-in-up animate-delay-100">
-                <div class="flex items-center gap-4 mb-2">
-                    <h2 class="text-4xl font-outfit font-bold text-white">ผลงานเด่น <span
-                            class="text-gradient">(Featured Projects)</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1: BOB -->
+                <div
+                    class="glass-panel rounded-3xl overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+                    <div
+                        class="h-48 bg-gradient-to-br from-indigo-900/40 to-slate-900 flex items-center justify-center relative">
+                        <i
+                            class="fas fa-robot text-6xl text-indigo-400/50 group-hover:text-indigo-400 group-hover:scale-110 transition-all duration-500"></i>
+                        <div
+                            class="absolute top-4 right-4 bg-black/40 backdrop-blur px-3 py-1 rounded-full text-[10px] text-indigo-300 font-bold border border-indigo-500/20">
+                            AI AGENT</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold text-white mb-3">BOB Oracle Awakening</h3>
+                        <p class="text-sm text-slate-400 mb-6 line-clamp-3">ระบบ AI Agent
+                            ขั้นสูงที่พัฒนาขึ้นเพื่อการเรียนรู้ ปรับตัว และวิเคราะห์โค้ดอัตโนมัติ (Autonomous Coding)
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span
+                                class="text-[10px] bg-indigo-500/10 text-indigo-300 px-2 py-1 rounded">Automation</span>
+                            <span class="text-[10px] bg-purple-500/10 text-purple-300 px-2 py-1 rounded">CLI</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
-                    <!-- Project 3: BOB Oracle Awakening -->
-                    <div class="glass-card rounded-2xl p-6 group flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-indigo-500/5 z-0"></div>
-                        <div class="relative z-10 flex justify-between items-start mb-4">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl group-hover:bg-indigo-500/20 transition-colors">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <span
-                                class="text-xs font-semibold px-3 py-1 bg-white/5 rounded-full text-slate-400 border border-white/10">Recent</span>
-                        </div>
-                        <h3
-                            class="relative z-10 text-white font-outfit text-xl font-bold mb-2 group-hover:text-indigo-400 transition-colors">
-                            BOB Oracle Awakening</h3>
-                        <p class="relative z-10 text-sm text-slate-400 mb-6 flex-grow">
-                            ระบบ AI Agent ขั้นสูงที่พัฒนาขึ้นเพื่อการเรียนรู้ ปรับตัว และวิเคราะห์โค้ดอัตโนมัติ
-                            (Autonomous Coding) ภายใต้เครือข่าย Oracle Family เน้นการสร้างทัศนคติแบบ Growth Mindset
-                            ให้กับ AI
-                        </p>
-                        <div class="relative z-10 flex flex-wrap gap-2 mb-2">
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-500/10 text-indigo-300 rounded border border-indigo-500/20">AI
-                                Agents</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-purple-500/10 text-purple-300 rounded border border-purple-500/20">CLI
-                                Tools</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-slate-500/10 text-slate-300 rounded border border-slate-500/20">Automation</span>
-                        </div>
+                <!-- Card 2: Racing -->
+                <div
+                    class="glass-panel rounded-3xl overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+                    <div
+                        class="h-48 bg-gradient-to-br from-amber-900/40 to-slate-900 flex items-center justify-center relative">
+                        <i
+                            class="fas fa-car-side text-6xl text-amber-400/50 group-hover:text-amber-400 group-hover:scale-110 transition-all duration-500"></i>
+                        <div
+                            class="absolute top-4 right-4 bg-black/40 backdrop-blur px-3 py-1 rounded-full text-[10px] text-amber-300 font-bold border border-amber-500/20">
+                            CYBER NEON</div>
                     </div>
-
-                    <!-- Project 4: DustBoy 3D -->
-                    <div class="glass-card rounded-2xl p-6 group flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-orange-500/5 z-0"></div>
-                        <div class="relative z-10 flex justify-between items-start mb-4">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-2xl group-hover:bg-rose-500/20 transition-colors">
-                                <i class="fas fa-smog"></i>
-                            </div>
-                            <span
-                                class="text-xs font-semibold px-3 py-1 bg-white/5 rounded-full text-slate-400 border border-white/10">3D
-                                App</span>
-                        </div>
-                        <h3
-                            class="relative z-10 text-white font-outfit text-xl font-bold mb-2 group-hover:text-rose-400 transition-colors">
-                            DustBoy 3D Data Visualization</h3>
-                        <p class="relative z-10 text-sm text-slate-400 mb-6 flex-grow">
-                            เว็บแอปพลิเคชันรูปแบบ 3 มิติ สำหรับแสดงข้อมูลปริมาณฝุ่น PM2.5 (DustBoy) แบบอินเทอร์แอคทีฟ
-                            นำเสนอข้อมูลสภาพอากาศให้เข้าใจง่ายผ่าน Data Visualization บนแผนที่สามมิติ
-                        </p>
-                        <div class="relative z-10 flex flex-wrap gap-2 mb-6">
-                            <span
-                                class="text-xs px-2 py-1 bg-rose-500/10 text-rose-300 rounded border border-rose-500/20">Three.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-amber-500/10 text-amber-300 rounded border border-amber-500/20">Data
-                                Viz</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-orange-500/10 text-orange-300 rounded border border-orange-500/20">API</span>
-                        </div>
-                        <a href="https://ratchanon00.github.io/ratchanon-oracle/dustboy-3d.html" target="_blank"
-                            class="relative z-10 w-full py-3 inline-flex items-center justify-center gap-2 bg-rose-600/50 hover:bg-rose-600 text-white font-medium rounded-xl transition-colors border border-rose-500/30">
-                            เปิดใช้งานแผนที่ 3D <i class="fas fa-external-link-alt text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Project 5: Travel 3D -->
-                    <div class="glass-card rounded-2xl p-6 group flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-cyan-500/5 z-0"></div>
-                        <div class="relative z-10 flex justify-between items-start mb-4">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-2xl group-hover:bg-teal-500/20 transition-colors">
-                                <i class="fas fa-map-marked-alt"></i>
-                            </div>
-                            <span
-                                class="text-xs font-semibold px-3 py-1 bg-white/5 rounded-full text-slate-400 border border-white/10">3D
-                                Tour</span>
-                        </div>
-                        <h3
-                            class="relative z-10 text-white font-outfit text-xl font-bold mb-2 group-hover:text-teal-400 transition-colors">
-                            Northern Thailand 3D Travel</h3>
-                        <p class="relative z-10 text-sm text-slate-400 mb-6 flex-grow">
-                            แผนที่จำลอง 3 มิติสำหรับการท่องเที่ยว แนะนำสถานที่ท่องเที่ยวสำคัญในโซนภาคเหนือ
-                            ผสมผสานประสบการณ์การท่องรูปแบบเว็บไซต์สามมิติ
-                        </p>
-                        <div class="relative z-10 flex flex-wrap gap-2 mb-6">
-                            <span
-                                class="text-xs px-2 py-1 bg-teal-500/10 text-teal-300 rounded border border-teal-500/20">Three.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-300 rounded border border-cyan-500/20">Interactive</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-sky-500/10 text-sky-300 rounded border border-sky-500/20">Web
-                                3D</span>
-                        </div>
-                        <a href="https://ratchanon00.github.io/ratchanon-oracle/travel-3d.html" target="_blank"
-                            class="relative z-10 w-full py-3 inline-flex items-center justify-center gap-2 bg-teal-600/50 hover:bg-teal-600 text-white font-medium rounded-xl transition-colors border border-teal-500/30">
-                            เข้าชมแผนที่ท่องเที่ยว <i class="fas fa-external-link-alt text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Project 1: JIBCHAIN -->
-                    <div class="glass-card rounded-2xl p-6 group flex flex-col h-full">
-                        <div class="flex justify-between items-start mb-4">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl group-hover:bg-blue-500/20 transition-colors">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <span
-                                class="text-xs font-semibold px-3 py-1 bg-white/5 rounded-full text-slate-400 border border-white/10">2568</span>
-                        </div>
-                        <h3
-                            class="text-white font-outfit text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">
-                            JIBCHAIN Sensor Dashboard</h3>
-                        <p class="text-sm text-slate-400 mb-6 flex-grow">
-                            Web Application ที่ใช้ Viem.js ดึงข้อมูลเซนเซอร์บน JIBCHAIN L1 Blockchain
-                            มาแสดงผลกราฟเรียลไทม์ด้วย Recharts
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-500/10 text-blue-300 rounded border border-blue-500/20">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-purple-500/10 text-purple-300 rounded border border-purple-500/20">Viem.js</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-indigo-500/10 text-indigo-300 rounded border border-indigo-500/20">Blockchain</span>
-                        </div>
-                        <a href="https://ratchanon00.github.io/jibchain-sensor-app/" target="_blank"
-                            class="w-full py-3 inline-flex items-center justify-center gap-2 bg-blue-600/50 hover:bg-blue-600 text-white font-medium rounded-xl transition-colors border border-blue-500/30">
-                            เข้าชมแดชบอร์ด <i class="fas fa-external-link-alt text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Project 2: Oracle Racing -->
-                    <div class="glass-card rounded-2xl p-6 group flex flex-col h-full">
-                        <div class="flex justify-between items-start mb-4">
-                            <div
-                                class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl group-hover:bg-amber-500/20 transition-colors">
-                                <i class="fas fa-car-side"></i>
-                            </div>
-                            <span
-                                class="text-xs font-semibold px-3 py-1 bg-white/5 rounded-full text-slate-400 border border-white/10">2569</span>
-                        </div>
-                        <h3
-                            class="text-white font-outfit text-xl font-bold mb-2 group-hover:text-amber-400 transition-colors">
-                            Oracle Racing 2D</h3>
-                        <p class="text-sm text-slate-400 mb-6 flex-grow">
-                            เกมแข่งรถสไตล์ Cyber-Neon แบบ Multiplayer Real-time พัฒนาด้วย React และ Tailwind CSS
-                            จัดการการเชื่อมต่อเครือข่ายเรียลไทม์ผ่าน MQTT WebSockets พร้อมระบบ Leaderboard
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span
-                                class="text-xs px-2 py-1 bg-amber-500/10 text-amber-300 rounded border border-amber-500/20">React</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-emerald-500/10 text-emerald-300 rounded border border-emerald-500/20">MQTT</span>
-                            <span
-                                class="text-xs px-2 py-1 bg-blue-500/10 text-blue-300 rounded border border-blue-500/20">Tailwind</span>
+                    <div class="p-8 h-full flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3">Oracle Racing 2D</h3>
+                        <p class="text-sm text-slate-400 mb-6 line-clamp-3">เกมแข่งรถสไตล์ Cyber-Neon แบบ Multiplayer
+                            WebSockets เรียลไทม์</p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-1 rounded">React</span>
+                            <span class="text-[10px] bg-emerald-500/10 text-emerald-300 px-2 py-1 rounded">MQTT</span>
                         </div>
                         <a href="https://ratchanon00.github.io/oracle-racing/" target="_blank"
-                            class="w-full py-3 inline-flex items-center justify-center gap-2 bg-amber-600/50 hover:bg-amber-600 text-white font-medium rounded-xl transition-colors border border-amber-500/30">
-                            ลองเล่นเกม <i class="fas fa-play text-sm"></i>
+                            class="mt-auto block w-full text-center py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/10 transition-colors">
+                            ลองเล่นเกม <i class="fas fa-play text-xs ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: DustBoy -->
+                <div
+                    class="glass-panel rounded-3xl overflow-hidden group hover:scale-[1.02] transition-all duration-500">
+                    <div
+                        class="h-48 bg-gradient-to-br from-rose-900/40 to-slate-900 flex items-center justify-center relative">
+                        <i
+                            class="fas fa-smog text-6xl text-rose-400/50 group-hover:text-rose-400 group-hover:scale-110 transition-all duration-500"></i>
+                        <div
+                            class="absolute top-4 right-4 bg-black/40 backdrop-blur px-3 py-1 rounded-full text-[10px] text-rose-300 font-bold border border-rose-500/20">
+                            3D DATA</div>
+                    </div>
+                    <div class="p-8 h-full flex flex-col">
+                        <h3 class="text-xl font-bold text-white mb-3">DustBoy 3D Viz</h3>
+                        <p class="text-sm text-slate-400 mb-6 line-clamp-3">แสดงข้อมูล PM2.5 แบบอินเทอร์แอคทีฟบนโลก 3
+                            มิติ</p>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="text-[10px] bg-rose-500/10 text-rose-300 px-2 py-1 rounded">Three.js</span>
+                            <span class="text-[10px] bg-sky-500/10 text-sky-300 px-2 py-1 rounded">Data Viz</span>
+                        </div>
+                        <a href="https://ratchanon00.github.io/ratchanon-oracle/dustboy-3d.html" target="_blank"
+                            class="mt-auto block w-full text-center py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/10 transition-colors">
+                            ดูข้อมูล 3D <i class="fas fa-external-link-alt text-xs ml-2"></i>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Experience View -->
-            <div id="view-experience" class="content-section hidden space-y-8 pb-12">
-                <h2 class="text-3xl font-outfit font-bold text-white mb-8 border-b border-white/10 pb-4"><i
-                        class="fas fa-briefcase text-purple-400 mr-2"></i> ประสบการณ์ & กิจกรรม</h2>
+            <div class="mt-12 text-center">
+                <p class="text-sm text-slate-500">และยังมีโปรเจกต์อื่นๆ ที่กำลังพัฒนาอย่างต่อเนื่อง...</p>
+            </div>
+        </div>
+    </section>
 
-                <div class="relative pl-8 border-l border-white/10 space-y-10">
-                    <!-- Item -->
-                    <div class="relative">
-                        <div class="absolute -left-[41px] w-5 h-5 rounded-full bg-slate-900 border-2 border-purple-500">
-                        </div>
-                        <div class="glass-card rounded-2xl p-6">
-                            <div class="flex flex-wrap justify-between items-baseline mb-2">
-                                <h3 class="text-xl font-bold text-white font-outfit">นักกีฬาฟุตบอลเยาวชน</h3>
-                                <span class="text-sm text-purple-400 font-medium">ระดับสถาบันการศึกษา</span>
-                            </div>
-                            <ul class="mt-4 space-y-2 text-slate-400 text-sm">
-                                <li class="flex items-start gap-2"><i
-                                        class="fas fa-check text-purple-500 mt-1 text-xs"></i>
-                                    <span>เข้าร่วมแข่งขันกีฬาฟุตบอลในสังกัดสถาบันและ กศน. เกมส์</span>
-                                </li>
-                                <li class="flex items-start gap-2"><i
-                                        class="fas fa-check text-purple-500 mt-1 text-xs"></i>
-                                    <span>เรียนรู้ทัศนคติการเป็นนักกีฬามืออาชีพและวิทยาศาสตร์การกีฬาสมัยใหม่ (Data
-                                        Analytics)</span>
-                                </li>
-                                <li class="flex items-start gap-2"><i
-                                        class="fas fa-check text-purple-500 mt-1 text-xs"></i>
-                                    <span>มีวินัยในการฝึกซ้อมและปฏิบัติตามแผนงานของผู้ฝึกสอนอย่างเคร่งครัด</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="section-title">ช่องทางการติดต่อ</h2>
+            <p class="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
+                ผมพร้อมเปิดรับโอกาสใหม่ๆ เสมอ หากคุณมีคำถาม หรือเพียงแค่ต้องการทักทาย
+                สามารถส่งข้อความหาผมได้เลย แล้วผมจะรีบตอบกลับให้เร็วที่สุด!
+            </p>
+            <div class="flex flex-col items-center">
+                <a href="mailto:terdnakub@gmail.com"
+                    class="px-12 py-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:scale-105 active:scale-95 text-white font-black text-2xl rounded-3xl transition-all shadow-[0_20px_50px_rgba(99,102,241,0.3)] mb-16">
+                    ส่งข้อความหาฉัน <i class="fas fa-paper-plane ml-3"></i>
+                </a>
 
-                    <!-- Item -->
-                    <div class="relative">
-                        <div class="absolute -left-[41px] w-5 h-5 rounded-full bg-slate-900 border-2 border-blue-500">
-                        </div>
-                        <div class="glass-card rounded-2xl p-6">
-                            <div class="flex flex-wrap justify-between items-baseline mb-2">
-                                <h3 class="text-xl font-bold text-white font-outfit">
-                                    ตัวแทนแข่งขันงานศิลปหัตถกรรมนักเรียน</h3>
-                                <span class="text-sm text-blue-400 font-medium">กลุ่มโรงเรียนหล่มสัก</span>
-                            </div>
-                            <ul class="mt-4 space-y-2 text-slate-400 text-sm">
-                                <li class="flex items-start gap-2"><i
-                                        class="fas fa-check text-blue-500 mt-1 text-xs"></i>
-                                    <span>ร่วมทีมเพื่อนำเสนอผลงานวิชาการ สร้างนวัตกรรมเข้าประกวดระดับชาติ</span>
-                                </li>
-                                <li class="flex items-start gap-2"><i
-                                        class="fas fa-check text-blue-500 mt-1 text-xs"></i>
-                                    <span>บูรณาการความรู้ทางวิชาการเข้ากับการปฏิบัติจริงภายใต้การดูแลของที่ปรึกษา</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="flex gap-6">
+                    <a href="https://github.com/Ratchanon00" target="_blank"
+                        class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center text-2xl text-slate-400 hover:text-white hover:border-indigo-500 transition-all">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#"
+                        class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center text-2xl text-slate-400 hover:text-white hover:border-indigo-500 transition-all">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
                 </div>
             </div>
-
-            <!-- Education View -->
-            <div id="view-education" class="content-section hidden space-y-8 pb-12">
-                <h2 class="text-3xl font-outfit font-bold text-white mb-8 border-b border-white/10 pb-4"><i
-                        class="fas fa-graduation-cap text-emerald-400 mr-2"></i> ประวัติการศึกษา</h2>
-
-                <div class="relative pl-8 border-l border-white/10 space-y-10">
-                    <div class="relative">
-                        <div
-                            class="absolute -left-[41px] w-5 h-5 rounded-full bg-slate-900 border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]">
-                        </div>
-                        <div class="glass-card border-none bg-emerald-500/5 rounded-2xl p-6">
-                            <div class="flex flex-wrap justify-between items-baseline mb-2">
-                                <h3 class="text-xl font-bold text-emerald-300 font-outfit">มหาวิทยาลัยราชภัฏพิบูลสงคราม
-                                    (พบค.)</h3>
-                                <span
-                                    class="bg-emerald-500/20 text-emerald-300 text-xs px-3 py-1 rounded-full border border-emerald-500/30">2566
-                                    - ปัจจุบัน</span>
-                            </div>
-                            <p class="text-white font-medium mb-3">วิศวกรรมศาสตรบัณฑิต สาขาวิชาวิศวกรรมคอมพิวเตอร์</p>
-                            <p class="text-slate-400 text-sm">มุ่งเน้นความต้องการของตลาดแรงงานในภูมิภาค
-                                พัฒนาทักษะด้านเทคโนโลยีสารสนเทศและนวัตกรรมใหม่ๆ</p>
-                        </div>
-                    </div>
-
-                    <div class="relative">
-                        <div class="absolute -left-[41px] w-5 h-5 rounded-full bg-slate-900 border-2 border-slate-600">
-                        </div>
-                        <div class="glass-card rounded-2xl p-6">
-                            <div class="flex flex-wrap justify-between items-baseline mb-2">
-                                <h3 class="text-lg font-bold text-white font-outfit">โรงเรียนหล่มสักวิทยาคม</h3>
-                                <span class="text-slate-500 text-sm">จบการศึกษา 2565</span>
-                            </div>
-                            <p class="text-slate-400 text-sm">นักเรียนระดับมัธยมศึกษา</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Skills View -->
-            <div id="view-skills" class="content-section hidden space-y-8 pb-12">
-                <h2 class="text-3xl font-outfit font-bold text-white mb-8 border-b border-white/10 pb-4"><i
-                        class="fas fa-star text-amber-400 mr-2"></i> ทักษะและความเชี่ยวชาญ</h2>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="glass-card rounded-xl p-6 border-t-4 border-t-blue-500">
-                        <h4 class="text-white font-outfit font-medium text-lg mb-4 flex items-center gap-2"><i
-                                class="fas fa-code text-blue-400"></i> วิชาการและเทคนิค</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1.5 bg-white/5 rounded-full text-sm text-slate-300 border border-white/10 hover:border-blue-400 transition-colors">วิศวกรรมคอมพิวเตอร์</span>
-                            <span
-                                class="px-3 py-1.5 bg-white/5 rounded-full text-sm text-slate-300 border border-white/10 hover:border-blue-400 transition-colors">เทคโนโลยีสารสนเทศ</span>
-                            <span
-                                class="px-3 py-1.5 bg-white/5 rounded-full text-sm text-slate-300 border border-white/10 hover:border-blue-400 transition-colors">React
-                                & Three.js</span>
-                            <span
-                                class="px-3 py-1.5 bg-white/5 rounded-full text-sm text-slate-300 border border-white/10 hover:border-blue-400 transition-colors">AI
-                                Agents</span>
-                        </div>
-                    </div>
-                    <div class="glass-card rounded-xl p-6 border-t-4 border-t-purple-500">
-                        <h4 class="text-white font-outfit font-medium text-lg mb-4 flex items-center gap-2"><i
-                                class="fas fa-users text-purple-400"></i> Soft Skills & Sports</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1.5 bg-white/5 rounded-full text-sm text-slate-300 border border-white/10 hover:border-purple-400 transition-colors">การทำงานเป็นทีม</span>
-                            <span
-                                class="px-3 py-1.5 bg-white/5 rounded-full text-sm text-slate-300 border border-white/10 hover:border-purple-400 transition-colors">ทัศนคติแบบมืออาชีพ</span>
-                            <span
-                                class="px-3 py-1.5 bg-white/5 rounded-full text-sm text-slate-300 border border-white/10 hover:border-purple-400 transition-colors">มีวินัยจากกีฬา</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </main>
-    </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/5 py-6 text-center text-slate-500 text-xs relative z-10 w-full mt-auto">
-        <p>&copy; 2026 Ratchanon Panchuen. SPA Portfolio Built with Vanilla JS & Tailwind CSS.</p>
+    <footer class="py-12 px-6 border-t border-white/5 text-center">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-sm text-slate-500">
+                &copy; 2026 Ratchanon Panchuen. สร้างสรรค์ด้วย <i class="fas fa-heart text-rose-500 mx-1"></i> โดยใช้
+                HTML & CSS
+            </p>
+        </div>
     </footer>
 
-    <!-- SPA Logic -->
     <script>
-        function switchTab(tabId) {
-            // Update buttons styling
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                // Reset all to inactive state
-                btn.className = 'tab-btn w-full py-3 px-4 rounded-xl text-slate-400 text-sm font-medium transition-all hover:text-white hover:bg-white/5 text-left border border-transparent';
-                // Restore normal icon alignment for inactive
-                const icon = btn.querySelector('i');
-                if (icon) icon.className = icon.className.replace('w-5', 'w-5 text-center');
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-entrance');
+                    entry.target.style.opacity = '1';
+                }
             });
+        }, observerOptions);
 
-            // Set active button state
-            const activeBtn = document.getElementById(`tab-${tabId}`);
-            activeBtn.className = 'tab-btn active w-full py-3 px-4 rounded-xl text-sm font-medium transition-all text-white bg-white/10 border border-white/20 shadow-lg relative overflow-hidden group';
-            // ensure active button has text-left removed and correct structure if needed, or just let CSS rules handle it
-            activeBtn.innerHTML = activeBtn.innerHTML.replace('text-center', ''); // tiny layout fix
-            activeBtn.innerHTML = `<span class="relative z-10 flex items-center gap-3">${activeBtn.innerHTML.replace('<span class="flex items-center gap-3">', '').replace('</span>', '')}</span><div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>`;
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('opacity-0');
+            observer.observe(section);
+        });
 
-
-            // Update content visibility
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.add('hidden');
-                section.classList.remove('animate-fade-in-up'); // reset animation
-            });
-
-            // Show new section and trigger animation
-            const selectedSection = document.getElementById(`view-${tabId}`);
-            selectedSection.classList.remove('hidden');
-            // Small delay to ensure browser registers the display:block before adding animation
-            setTimeout(() => {
-                selectedSection.classList.add('animate-fade-in-up');
-            }, 10);
-
-            // Scroll to top on mobile
-            if (window.innerWidth < 1024) {
-                window.scrollTo({ top: document.querySelector('main').offsetTop - 20, behavior: 'smooth' });
-            }
-        }
-
-        // Initialize specific stylings for the already active tab on load
-        document.addEventListener('DOMContentLoaded', () => {
-            // ensure correct default styling
+        // Mobile menu toggle (simple version)
+        document.querySelector('.md\\:hidden').addEventListener('click', () => {
+            // Toggle logic could be added here for a mobile drawer
+            alert('Menu functionality for mobile');
         });
     </script>
 </body>
